@@ -21,7 +21,7 @@ import Model.RestDTO;
 import Model.StayDAO;
 import Model.StayDTO;
 
-@WebServlet("/test/testAjax")
+@WebServlet("/testAjax")
 public class testAjax extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
