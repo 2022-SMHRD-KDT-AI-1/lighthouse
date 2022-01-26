@@ -4,4 +4,14 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>ajaxTest</servlet-name>
+  	<display-name>ajaxTest</display-name>
+  	<description></description>
+  	<servlet-class>com.test.ajaxTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ajaxTest</servlet-name>
+  	<url-pattern>/ajaxTest</url-pattern>
+  </servlet-mapping>
 </web-app>
