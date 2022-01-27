@@ -17,7 +17,6 @@
 	<%
 		GuDAO dao = new GuDAO();
 		ArrayList<GuDTO> gu_list = dao.selectAll();
-		
 	%>
 
 
@@ -49,9 +48,42 @@
 
 
 	<div id="map" style="width: 100%; height: 600px;"></div>
+	<span class="seq"></span><br>
+	<span id="name"></span><br>
+	<span id="addr"></span><br>
+	<span id="tel"></span><br>
+	<span id="approach"></span><br>
+	<span id="hdiff"></span><br>
+	<span id="parking"></span><br>
+	<span id="elev"></span><br>
+	<span id="toilet"></span><br>
 	
-	<p id="res"></p>
 	
+	<h1>Review</h1>
+	<h3 class="seq"></h3>
+	<span>Q1</span>
+    1<input type="radio" id="q1" name="q1" value="1">
+    2<input type="radio" id="q1" name="q1" value="2">
+    3<input type="radio" id="q1" name="q1" value="3">
+    4<input type="radio" id="q1" name="q1" value="4">
+    5<input type="radio" id="q1" name="q1" value="5">
+    <br>
+    <span>Q2</span>
+    1<input type="radio" id="q2" name="q2" value="1">
+    2<input type="radio" id="q2" name="q2" value="2">
+    3<input type="radio" id="q2" name="q2" value="3">
+    4<input type="radio" id="q2" name="q2" value="4">
+    5<input type="radio" id="q2" name="q2" value="5">
+    <br>
+    <span>Q3</span>
+    1<input type="radio" id="q3" name="q3" value="1">
+    2<input type="radio" id="q3" name="q3" value="2">
+    3<input type="radio" id="q3" name="q3" value="3">
+    4<input type="radio" id="q3" name="q3" value="4">
+    5<input type="radio" id="q3" name="q3" value="5">
+    <br>
+    <textarea id="text" name="text" placeholder="간단한 리뷰를 작성하세요"></textarea>
+    <button onclick="reviewTest()">제출</button>
 	<script>
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
@@ -65,20 +97,8 @@
 		// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
 		var positions = [
 			{
-		        content: '<div>카카오</div>', 
+		        content: '<div>카카오</div>',
 		        latlng: new kakao.maps.LatLng(33.450705, 126.570677)
-		    },
-		    {
-		        content: '<div>생태연못</div>', 
-		        latlng: new kakao.maps.LatLng(33.450936, 126.569477)
-		    },
-		    {
-		        content: '<div>텃밭</div>', 
-		        latlng: new kakao.maps.LatLng(33.450879, 126.569940)
-		    },
-		    {
-		        content: '<div>근린공원</div>',
-		        latlng: new kakao.maps.LatLng(33.451393, 126.570738)
 		    }
 		];
 
@@ -119,25 +139,26 @@
 			};
 		}
 		
-		var kind = "";
-		var gu = "";
-		
-		
+		var testseq = 0;
 		
 		function test() {
+			// select태그에서 선택된 값을 변수에 담음
+			var kind = $("#kind").val();
+			var gu = $("#gu").val();
 			
-			//console.log("여기 들어와");
-			kind = $("#kind").val();
-			gu = $("#gu").val();
 			
-			
-
+			// 한 번에 키밸류에 담음
 			var param = {
 				"kind" : kind,
 				"gu" : gu
 			};
 			
-			
+			// ajax소환..
+			// anyne는 안해도됨
+			// url은 보낼 곳... testAjax.java에 보낼거임
+			// data : 보낼 데이터가 있으면 적으삼
+			// dataType : 리턴받을 데이터 타입 json, html, text 등..
+			// success: 성공했을 때~
 			$.ajax({
 				anyne : true,
 				url : "testAjax",
@@ -150,7 +171,7 @@
 					var mapContainer = document.getElementById('map'),
 					mapOption = {
 							center : new kakao.maps.LatLng(data[0].Latitude, data[0].Longitude), 
-							level : 3
+							level : 2
 						// 지도의 확대 레벨
 					};
 					var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -159,9 +180,29 @@
 					// 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
 					for(var i=0; i<data.length; i++){
 						positions.push({
+							// 순번
+							sequence : data[i].Seq,
+							// 시설명
 							content : data[i].Name,
+							// 주소
+							addr : data[i].Addr,
+							// 전화번호
+							tel : data[i].Tel,
+							// 접근로 여부1
+							approach : data[i].Approach,
+							// 높이차이 여부2
+							hdiff : data[i].HeightDiff,
+							// 주차장 여부3
+							parking : data[i].Parking,
+							// 승강기 여부4
+							elev : data[i].Elev,
+							// 화장실 여부5
+							toilet : data[i].Toilet,
+							// 좌표
 							latlng : new kakao.maps.LatLng(data[i].Latitude,data[i].Longitude)
 						});
+						
+						
 						
 					}
 						
@@ -180,6 +221,10 @@
 							content : positions[i].content
 						// 인포윈도우에 표시할 내용
 						});
+						
+						kakao.maps.event.addListener(marker, 'click', chDiv(positions[i].sequence, positions[i].content,positions[i].addr, 
+								positions[i].tel, positions[i].approach, positions[i].hdiff,positions[i].parking, 
+								positions[i].elev, positions[i].toilet));
 
 						// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 						// 이벤트 리스너로는 클로저를 만들어 등록합니다 
@@ -205,14 +250,92 @@
 					}
 					
 					
+					
+					function chDiv(sequence, content, addr, tel, approach, hdiff, parking, elev, toilet){
+						return function(){
+							var ch_seq = document.getElementsByClassName('seq');  
+							ch_seq.innerHTML = sequence;
+							testseq = sequence;
+							console.log(testseq);
+
+							var ch_name = document.getElementById('name');
+							ch_name.innerHTML = content;
+							
+							var ch_addr = document.getElementById('addr');
+							ch_addr.innerHTML = addr;
+							
+							var ch_tel = document.getElementById('tel');
+							ch_tel.innerHTML = tel;
+							
+							var ch_approach = document.getElementById('approach');
+							ch_approach.innerHTML = approach;
+							
+							var ch_hdiff = document.getElementById('hdiff');
+							ch_hdiff.innerHTML = hdiff;
+							
+							var ch_parking = document.getElementById('parking');
+							ch_parking.innerHTML = parking;
+							
+							var ch_elev = document.getElementById('elev');
+							ch_elev.innerHTML = elev;
+							
+							var ch_toilet = document.getElementById('toilet');
+							ch_toilet.innerHTML = toilet;
+							
+							
+						}
+					}
+					
+					
+				
 				},
 				error : function(e, c, d) {
 					alert('error');
 					console.log("ERROR : " + c + " : " + d);
 				}
+				
 
 			});
 		}
+		
+		function reviewTest(){
+			var kind = $("#kind").val();
+			var s1 = $('input[name="q1"]:checked').val();
+			var s2 = $('input[name="q2"]:checked').val();
+			var s3 = $('input[name="q3"]:checked').val();
+			var text = $("#text").val();
+
+			
+			// 한 번에 키밸류에 담음
+			var param = {
+				"kind" : kind,
+				"seq" : testseq,
+				"s1" : s1,
+				"s2" : s2,
+				"s3" : s3,
+				"text" : text
+				
+			};
+
+			$.ajax({
+				anyne : true,
+				url : "reviewAjax",
+				type : "post",
+				data : param,
+				success : function(data) {
+					console.log("성공");
+					console.log(data);
+			
+				},
+				error : function(e, c, d) {
+					alert('실패');
+					console.log("ERROR : " + c + " : " + d);
+				}
+			});
+
+		}
+		
+		
 		
 		</script>
 

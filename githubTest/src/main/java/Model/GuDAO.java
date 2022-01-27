@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class GuDAO {
 
-	
 	Connection conn = null;
 	ResultSet rs = null;
 	PreparedStatement psmt = null;
@@ -108,4 +107,5 @@ public class GuDAO {
 		}
 		return dto;
 	}
+
 }

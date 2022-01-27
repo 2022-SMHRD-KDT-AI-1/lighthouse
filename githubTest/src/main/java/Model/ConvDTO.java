@@ -3,155 +3,154 @@ package Model;
 public class ConvDTO {
 	
 	// 편의시설 순번 
-    private int convSeq;
+    private int Seq;
 
     // 편의시설 명 
     private String Name;
 
     // 편의시설 주소 
-    private String convAddr;
+    private String Addr;
 
     // 편의시설 담당구 
     private String convGu;
 
     // 편의시설 연락처 
-    private String convTel;
+    private String Tel;
 
     // 주출입구 접근로 여부 
-    private String convApproach;
+    private String Approach;
 
     // 주출입구 높이차이 제거 여부 
-    private String convHeightDiff;
+    private String HeightDiff;
 
     // 장애인 전용 주차구역 여부 
-    private String convParking;
+    private String Parking;
 
     // 장애인 전용 승강기 여부 
-    private String convElev;
+    private String Elev;
 
     // 장애인 전용 화장실 여부 
-    private String convToilet;
+    private String Toilet;
     
     // 편의시설 위도 
     private float Latitude;
 
     // 편의시설 경도 
     private float Longitude;
-    
-    
-    public ConvDTO(int convSeq, String Name, String convAddr, String convGu, String convTel, String convApproach,
-			String convHeightDiff, String convParking, String convElev, String convToilet, float Latitude,
-			float Longitude) {
+
+	public ConvDTO(int Seq, String name, String addr, String convGu, String tel, String approach, String heightDiff,
+			String parking, String elev, String toilet, float latitude, float longitude) {
 		super();
-		this.convSeq = convSeq;
-		this.Name = Name;
-		this.convAddr = convAddr;
+		this.Seq = Seq;
+		Name = name;
+		Addr = addr;
 		this.convGu = convGu;
-		this.convTel = convTel;
-		this.convApproach = convApproach;
-		this.convHeightDiff = convHeightDiff;
-		this.convParking = convParking;
-		this.convElev = convElev;
-		this.convToilet = convToilet;
-		this.Latitude = Latitude;
-		this.Longitude = Longitude;
+		Tel = tel;
+		Approach = approach;
+		HeightDiff = heightDiff;
+		Parking = parking;
+		Elev = elev;
+		Toilet = toilet;
+		Latitude = latitude;
+		Longitude = longitude;
 	}
 
-	public int getConvSeq() {
-        return convSeq;
-    }
+	public int getSeq() {
+		return Seq;
+	}
 
-    public void setConvSeq(int convSeq) {
-        this.convSeq = convSeq;
-    }
+	public void setSeq(int Seq) {
+		this.Seq = Seq;
+	}
 
-    public String getName() {
-        return Name;
-    }
+	public String getName() {
+		return Name;
+	}
 
-    public void setName(String Name) {
-        this.Name = Name;
-    }
+	public void setName(String name) {
+		Name = name;
+	}
 
-    public String getConvAddr() {
-        return convAddr;
-    }
+	public String getAddr() {
+		return Addr;
+	}
 
-    public void setConvAddr(String convAddr) {
-        this.convAddr = convAddr;
-    }
+	public void setAddr(String addr) {
+		Addr = addr;
+	}
 
-    public String getConvGu() {
-        return convGu;
-    }
+	public String getConvGu() {
+		return convGu;
+	}
 
-    public void setConvGu(String convGu) {
-        this.convGu = convGu;
-    }
+	public void setConvGu(String convGu) {
+		this.convGu = convGu;
+	}
 
-    public String getConvTel() {
-        return convTel;
-    }
+	public String getTel() {
+		return Tel;
+	}
 
-    public void setConvTel(String convTel) {
-        this.convTel = convTel;
-    }
+	public void setTel(String tel) {
+		Tel = tel;
+	}
 
-    public String getConvApproach() {
-        return convApproach;
-    }
+	public String getApproach() {
+		return Approach;
+	}
 
-    public void setConvApproach(String convApproach) {
-        this.convApproach = convApproach;
-    }
+	public void setApproach(String approach) {
+		Approach = approach;
+	}
 
-    public String getConvHeightDiff() {
-        return convHeightDiff;
-    }
+	public String getHeightDiff() {
+		return HeightDiff;
+	}
 
-    public void setConvHeightDiff(String convHeightDiff) {
-        this.convHeightDiff = convHeightDiff;
-    }
+	public void setHeightDiff(String heightDiff) {
+		HeightDiff = heightDiff;
+	}
 
-    public String getConvParking() {
-        return convParking;
-    }
+	public String getParking() {
+		return Parking;
+	}
 
-    public void setConvParking(String convParking) {
-        this.convParking = convParking;
-    }
+	public void setParking(String parking) {
+		Parking = parking;
+	}
 
-    public String getConvElev() {
-        return convElev;
-    }
+	public String getElev() {
+		return Elev;
+	}
 
-    public void setConvElev(String convElev) {
-        this.convElev = convElev;
-    }
+	public void setElev(String elev) {
+		Elev = elev;
+	}
 
-    public String getConvToilet() {
-        return convToilet;
-    }
+	public String getToilet() {
+		return Toilet;
+	}
 
-    public void setConvToilet(String convToilet) {
-        this.convToilet = convToilet;
-    }
+	public void setToilet(String toilet) {
+		Toilet = toilet;
+	}
 
 	public float getLatitude() {
 		return Latitude;
 	}
 
-	public void setLatitude(float Latitude) {
-		this.Latitude = Latitude;
+	public void setLatitude(float latitude) {
+		Latitude = latitude;
 	}
 
 	public float getLongitude() {
 		return Longitude;
 	}
 
-	public void setConvLongitude(float Longitude) {
-		this.Longitude = Longitude;
+	public void setLongitude(float longitude) {
+		Longitude = longitude;
 	}
+    
     
     
 

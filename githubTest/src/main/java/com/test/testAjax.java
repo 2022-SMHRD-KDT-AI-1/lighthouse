@@ -28,13 +28,18 @@ public class testAjax extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		/* 시설분야와 구를 선택했을 때 ajax로 주고받는 곳.... */
+		
 		response.setCharacterEncoding("utf-8");
 		
 		PrintWriter out = response.getWriter();
 		
+		// 수업때랑 똑같이 name으로 값 받음, 안받아도 되면 생략가능
 		String kind = request.getParameter("kind");
 		String gu = request.getParameter("gu");
 		
+		// 난 dao, dto 소환해야함 
+		// kind, gu값에 따라 값이 달라기지때문.. 
 		RestDAO rest_dao = new RestDAO();
 		ConvDAO conv_dao = new ConvDAO();
 		StayDAO stay_dao = new StayDAO();
@@ -45,6 +50,8 @@ public class testAjax extends HttpServlet {
 		ArrayList<StayDTO> stay_dto = null;
 		ArrayList<RehabDTO> rehab_dto = null;
 		
+		// Gson : 객체를 json형태로 변환시켜줌
+		// 변환시켜주고 난 jsonString에 담아줬다..
 		Gson gson = new Gson();
 		String jsonString = null;
 		
@@ -63,6 +70,8 @@ public class testAjax extends HttpServlet {
 			//jsonString = gson.toJson(rest_dto);
 		}
 		
+		// 그리고 out.print 해주면 된다는데
+		// 이걸로... 보내지나봄..?!!!
 		System.out.println(jsonString);
 		out.print(jsonString);
 		

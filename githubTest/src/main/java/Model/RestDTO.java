@@ -2,165 +2,156 @@ package Model;
 
 public class RestDTO {
 	
-	// 음식점 순번 
-    private int restSeq;
+    // 음식점 순번 
+    private int Seq;
 
     // 음식점 명 
-    private String restName;
+    private String Name;
 
     // 음식점 주소 
-    private String restAddr;
+    private String Addr;
 
     // 음식점 담당구 
     private String restGu;
 
     // 음식점 연락처 
-    private String restTel;
+    private String Tel;
 
     // 주출입구 접근로 여부 
-    private String restApproach;
+    private String Approach;
 
     // 주출입구 높이차이 제거 여부 
-    private String restHeightDiff;
+    private String HeightDiff;
 
     // 장애인 전용 주차구역 여부 
-    private String restParking;
+    private String Parking;
 
     // 장애인 전용 승강기 여부 
-    private String restElev;
+    private String Elev;
 
     // 장애인 전용 화장실 여부 
-    private String restToilet;
+    private String Toilet;
 
     // 음식점 위도 
-    private float restLatitude;
+    private float Latitude;
 
     // 음식점 경도 
-    private float restLongitude;
-    
-    
-    public RestDTO(int restSeq, String restName, String restAddr, String restGu, String restTel,
-			String restApproach, String restHeightDiff, String restParking, String restElev, String restToilet,
-			float restLatitude, float restLongitude) {
+    private float Longitude;
+
+	public RestDTO(int Seq, String name, String addr, String restGu, String tel, String approach, String heightDiff,
+			String parking, String elev, String toilet, float latitude, float longitude) {
 		super();
-		this.restSeq = restSeq;
-		this.restName = restName;
-		this.restAddr = restAddr;
+		this.Seq = Seq;
+		Name = name;
+		Addr = addr;
 		this.restGu = restGu;
-		this.restTel = restTel;
-		this.restApproach = restApproach;
-		this.restHeightDiff = restHeightDiff;
-		this.restParking = restParking;
-		this.restElev = restElev;
-		this.restToilet = restToilet;
-		this.restLatitude = restLatitude;
-		this.restLongitude = restLongitude;
+		Tel = tel;
+		Approach = approach;
+		HeightDiff = heightDiff;
+		Parking = parking;
+		Elev = elev;
+		Toilet = toilet;
+		Latitude = latitude;
+		Longitude = longitude;
 	}
-    
-    
-    // 음식점 위도, 경도 좌표
-	public RestDTO(float restLatitude, float restLongitude) {
-		super();
-		this.restLatitude = restLatitude;
-		this.restLongitude = restLongitude;
-	}
-
-
 
 	public int getRestSeq() {
-        return restSeq;
-    }
+		return Seq;
+	}
 
-    public void setRestSeq(int restSeq) {
-        this.restSeq = restSeq;
-    }
+	public void setRestSeq(int Seq) {
+		this.Seq = Seq;
+	}
 
-    public String getRestName() {
-        return restName;
-    }
+	public String getName() {
+		return Name;
+	}
 
-    public void setRestName(String restName) {
-        this.restName = restName;
-    }
+	public void setName(String name) {
+		Name = name;
+	}
 
-    public String getRestAddr() {
-        return restAddr;
-    }
+	public String getAddr() {
+		return Addr;
+	}
 
-    public void setRestAddr(String restAddr) {
-        this.restAddr = restAddr;
-    }
+	public void setAddr(String addr) {
+		Addr = addr;
+	}
 
-    public String getRestGu() {
-        return restGu;
-    }
+	public String getRestGu() {
+		return restGu;
+	}
 
-    public void setRestGu(String restGu) {
-        this.restGu = restGu;
-    }
+	public void setRestGu(String restGu) {
+		this.restGu = restGu;
+	}
 
-    public String getRestTel() {
-        return restTel;
-    }
+	public String getTel() {
+		return Tel;
+	}
 
-    public void setRestTel(String restTel) {
-        this.restTel = restTel;
-    }
+	public void setTel(String tel) {
+		Tel = tel;
+	}
 
-    public String getRestApproach() {
-        return restApproach;
-    }
+	public String getApproach() {
+		return Approach;
+	}
 
-    public void setRestApproach(String restApproach) {
-        this.restApproach = restApproach;
-    }
+	public void setApproach(String approach) {
+		Approach = approach;
+	}
 
-    public String getRestHeightDiff() {
-        return restHeightDiff;
-    }
+	public String getHeightDiff() {
+		return HeightDiff;
+	}
 
-    public void setRestHeightDiff(String restHeightDiff) {
-        this.restHeightDiff = restHeightDiff;
-    }
+	public void setHeightDiff(String heightDiff) {
+		HeightDiff = heightDiff;
+	}
 
-    public String getRestParking() {
-        return restParking;
-    }
+	public String getParking() {
+		return Parking;
+	}
 
-    public void setRestParking(String restParking) {
-        this.restParking = restParking;
-    }
+	public void setParking(String parking) {
+		Parking = parking;
+	}
 
-    public String getRestElev() {
-        return restElev;
-    }
+	public String getElev() {
+		return Elev;
+	}
 
-    public void setRestElev(String restElev) {
-        this.restElev = restElev;
-    }
+	public void setElev(String elev) {
+		Elev = elev;
+	}
 
-    public String getRestToilet() {
-        return restToilet;
-    }
+	public String getToilet() {
+		return Toilet;
+	}
 
-    public void setRestToilet(String restToilet) {
-        this.restToilet = restToilet;
-    }
+	public void setToilet(String toilet) {
+		Toilet = toilet;
+	}
 
-    public float getRestLatitude() {
-        return restLatitude;
-    }
+	public float getLatitude() {
+		return Latitude;
+	}
 
-    public void setRestLatitude(float restLatitude) {
-        this.restLatitude = restLatitude;
-    }
+	public void setLatitude(float latitude) {
+		Latitude = latitude;
+	}
 
-    public float getRestLongitude() {
-        return restLongitude;
-    }
+	public float getLongitude() {
+		return Longitude;
+	}
 
-    public void setRestLongitude(float restLongitude) {
-        this.restLongitude = restLongitude;
-    }
+	public void setLongitude(float longitude) {
+		Longitude = longitude;
+	}
+    
+    
+   
 
 }
