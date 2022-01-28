@@ -13,7 +13,7 @@ public class RestRvDAO {
 	PreparedStatement psmt = null;
 
 	RestRvDTO dto = null;
-
+	int cnt = 0;
 	public void DBconn() {
 
 		try {
@@ -48,11 +48,11 @@ public class RestRvDAO {
 	}
 	
 	public int insertReview(int seq, int s1, int s2, int s3, String text) {
-		int cnt = 0;
+		
 		try {
 			DBconn();
 			
-			String sql = "insert into values(?,?,?,?,?)";
+			String sql = "insert into tbl_rest_review values(?,?,?,?,?)";
 			
 			psmt=conn.prepareStatement(sql);
 			

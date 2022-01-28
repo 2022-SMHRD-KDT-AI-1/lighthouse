@@ -48,7 +48,7 @@
 
 
 	<div id="map" style="width: 100%; height: 600px;"></div>
-	<span class="seq"></span><br>
+	<span id="seq"></span><br>
 	<span id="name"></span><br>
 	<span id="addr"></span><br>
 	<span id="tel"></span><br>
@@ -58,34 +58,38 @@
 	<span id="elev"></span><br>
 	<span id="toilet"></span><br>
 	
-	
-	<h1>Review</h1>
-	<h3 class="seq"></h3>
-	<span>Q1</span>
-    1<input type="radio" id="q1" name="q1" value="1">
-    2<input type="radio" id="q1" name="q1" value="2">
-    3<input type="radio" id="q1" name="q1" value="3">
-    4<input type="radio" id="q1" name="q1" value="4">
-    5<input type="radio" id="q1" name="q1" value="5">
-    <br>
-    <span>Q2</span>
-    1<input type="radio" id="q2" name="q2" value="1">
-    2<input type="radio" id="q2" name="q2" value="2">
-    3<input type="radio" id="q2" name="q2" value="3">
-    4<input type="radio" id="q2" name="q2" value="4">
-    5<input type="radio" id="q2" name="q2" value="5">
-    <br>
-    <span>Q3</span>
-    1<input type="radio" id="q3" name="q3" value="1">
-    2<input type="radio" id="q3" name="q3" value="2">
-    3<input type="radio" id="q3" name="q3" value="3">
-    4<input type="radio" id="q3" name="q3" value="4">
-    5<input type="radio" id="q3" name="q3" value="5">
-    <br>
-    <textarea id="text" name="text" placeholder="간단한 리뷰를 작성하세요"></textarea>
-    <button onclick="reviewTest()">제출</button>
+	<form action="reviewService" method="post">
+		<input  type="hidden" name="chkind" id="chkind">
+		<h1>Review</h1>
+		<select id="Rselect" name="Rselect"></select><br>
+		<span>Q1</span>
+	    1<input type="radio" id="q1" name="q1" value="1">
+	    2<input type="radio" id="q1" name="q1" value="2">
+	    3<input type="radio" id="q1" name="q1" value="3">
+	    4<input type="radio" id="q1" name="q1" value="4">
+	    5<input type="radio" id="q1" name="q1" value="5">
+	    <br>
+	    <span>Q2</span>
+	    1<input type="radio" id="q2" name="q2" value="1">
+	    2<input type="radio" id="q2" name="q2" value="2">
+	    3<input type="radio" id="q2" name="q2" value="3">
+	    4<input type="radio" id="q2" name="q2" value="4">
+	    5<input type="radio" id="q2" name="q2" value="5">
+	    <br>
+	    <span>Q3</span>
+	    1<input type="radio" id="q3" name="q3" value="1">
+	    2<input type="radio" id="q3" name="q3" value="2">
+	    3<input type="radio" id="q3" name="q3" value="3">
+	    4<input type="radio" id="q3" name="q3" value="4">
+	    5<input type="radio" id="q3" name="q3" value="5">
+	    <br>
+	    <textarea id="text" name="text" placeholder="간단한 리뷰를 작성하세요"></textarea>
+	    <input type="submit" value="보내기">
+    </form>
 	<script>
-
+		$('#kind').on('change',function(){
+			$('input[name=chkind]').attr('value', this.value);
+		})
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		mapOption = {
 			center : new kakao.maps.LatLng(33.450701, 126.570667), // 초기 지도 중심좌표 , 현 위치로 하고싶음
@@ -140,7 +144,7 @@
 		}
 		
 		var testseq = 0;
-		
+		/* ======================= 여기서부터 '선택'버튼 클릭했을 때  ======================== */
 		function test() {
 			// select태그에서 선택된 값을 변수에 담음
 			var kind = $("#kind").val();
@@ -207,7 +211,8 @@
 					}
 						
 					
-
+					var testseq = [];
+					var testName = [];
 					for (var i = 0; i < positions.length; i++) {
 						// 마커를 생성합니다
 						var marker = new kakao.maps.Marker({
@@ -222,6 +227,9 @@
 						// 인포윈도우에 표시할 내용
 						});
 						
+						testseq.push(positions[i].sequence);
+						testName.push(positions[i].content);
+						
 						kakao.maps.event.addListener(marker, 'click', chDiv(positions[i].sequence, positions[i].content,positions[i].addr, 
 								positions[i].tel, positions[i].approach, positions[i].hdiff,positions[i].parking, 
 								positions[i].elev, positions[i].toilet));
@@ -233,7 +241,11 @@
 								map, marker, infowindow));
 						kakao.maps.event.addListener(marker, 'mouseout',
 								makeOutListener(infowindow));
+						
+						$('#Rselect').append('<option name="Rselect" value="'+ testseq[i] +'">'+ testName[i] +'</option>');
 					}
+					
+					console.log(testName);
 
 					// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
 					function makeOverListener(map, marker, infowindow) {
@@ -253,10 +265,8 @@
 					
 					function chDiv(sequence, content, addr, tel, approach, hdiff, parking, elev, toilet){
 						return function(){
-							var ch_seq = document.getElementsByClassName('seq');  
+							var ch_seq = document.getElementById('seq');  
 							ch_seq.innerHTML = sequence;
-							testseq = sequence;
-							console.log(testseq);
 
 							var ch_name = document.getElementById('name');
 							ch_name.innerHTML = content;
@@ -285,7 +295,7 @@
 							
 						}
 					}
-					
+
 					
 				
 				},
@@ -298,42 +308,7 @@
 			});
 		}
 		
-		function reviewTest(){
-			var kind = $("#kind").val();
-			var s1 = $('input[name="q1"]:checked').val();
-			var s2 = $('input[name="q2"]:checked').val();
-			var s3 = $('input[name="q3"]:checked').val();
-			var text = $("#text").val();
-
-			
-			// 한 번에 키밸류에 담음
-			var param = {
-				"kind" : kind,
-				"seq" : testseq,
-				"s1" : s1,
-				"s2" : s2,
-				"s3" : s3,
-				"text" : text
-				
-			};
-
-			$.ajax({
-				anyne : true,
-				url : "reviewAjax",
-				type : "post",
-				data : param,
-				success : function(data) {
-					console.log("성공");
-					console.log(data);
-			
-				},
-				error : function(e, c, d) {
-					alert('실패');
-					console.log("ERROR : " + c + " : " + d);
-				}
-			});
-
-		}
+		
 		
 		
 		
