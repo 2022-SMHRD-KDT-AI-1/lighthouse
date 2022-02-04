@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class RestRvDAO {
 	
@@ -68,6 +69,37 @@ public class RestRvDAO {
 		} finally {
 			DBclose();
 		} return cnt;
+	}
+	
+	public ArrayList<RestRvDTO> selectReview(int seq) {
+		System.out.println("select ¸®ºä µé¾î¿È");
+		ArrayList<RestRvDTO> list = new ArrayList<RestRvDTO>();
+		try {
+			DBconn();
+			
+			String sql = "select * from tbl_rest_review seq = ?";
+			
+			psmt=conn.prepareStatement(sql);
+			
+			psmt.setInt(1, seq);
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				int sequence = rs.getInt(1);
+				int s1 = rs.getInt(2);
+				int s2 = rs.getInt(3);
+				int s3 = rs.getInt(4);
+				String txt = rs.getString(5);
+				
+				dto = new RestRvDTO(sequence, s1, s2, s3, txt);
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBclose();
+		} return list;
 	}
 
 }

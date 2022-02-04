@@ -58,9 +58,13 @@
 	<span id="elev"></span><br>
 	<span id="toilet"></span><br>
 	
+	<h1>===Review===</h1>
+	<div>
+	</div>
+	
 	<form action="reviewService" method="post">
 		<input  type="hidden" name="chkind" id="chkind">
-		<h1>Review</h1>
+		<h1>Review 작성하기</h1>
 		<select id="Rselect" name="Rselect"></select><br>
 		<span>Q1</span>
 	    1<input type="radio" id="q1" name="q1" value="1">
@@ -89,6 +93,9 @@
 	<script>
 		$('#kind').on('change',function(){
 			$('input[name=chkind]').attr('value', this.value);
+		})
+		$('#seq').on('change',function(){
+			$
 		})
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 		mapOption = {

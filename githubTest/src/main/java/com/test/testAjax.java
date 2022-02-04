@@ -18,6 +18,8 @@ import Model.RehabDAO;
 import Model.RehabDTO;
 import Model.RestDAO;
 import Model.RestDTO;
+import Model.RestRvDAO;
+import Model.RestRvDTO;
 import Model.StayDAO;
 import Model.StayDTO;
 
@@ -44,11 +46,13 @@ public class testAjax extends HttpServlet {
 		ConvDAO conv_dao = new ConvDAO();
 		StayDAO stay_dao = new StayDAO();
 		RehabDAO rehab_dao = new RehabDAO();
+		RestRvDAO rest_rv_dao = new RestRvDAO();
 		
 		ArrayList<RestDTO> rest_dto = null;
 		ArrayList<ConvDTO> conv_dto = null;
 		ArrayList<StayDTO> stay_dto = null;
 		ArrayList<RehabDTO> rehab_dto = null;
+		ArrayList<RestRvDTO> rest_rv_select = null;
 		
 		// Gson : 객체를 json형태로 변환시켜줌
 		// 변환시켜주고 난 jsonString에 담아줬다..
