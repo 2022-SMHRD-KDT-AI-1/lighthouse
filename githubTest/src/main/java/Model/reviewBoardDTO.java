@@ -1,6 +1,6 @@
 package Model;
 
-public class RestRvDTO {
+public class reviewBoardDTO {
 	
 	private int seq;
 	private String id;
@@ -13,7 +13,8 @@ public class RestRvDTO {
 	private String text;
 	private String name;
 	
-	public RestRvDTO(int seq, String id, int s1, int s2, int s3, int s4, int s5, String date, String text, String name) {
+	public reviewBoardDTO(int seq, String id, int s1, int s2, int s3, int s4, int s5, String date, String text,
+			String name) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -27,6 +28,9 @@ public class RestRvDTO {
 		this.name = name;
 		
 	}
+	
+	
+	
 
 	public int getSeq() {
 		return seq;
@@ -114,4 +118,6 @@ public class RestRvDTO {
 	
 	
 	
+	
+
 }

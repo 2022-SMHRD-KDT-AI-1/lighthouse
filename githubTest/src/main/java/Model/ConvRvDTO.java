@@ -1,6 +1,6 @@
 package Model;
 
-public class RestRvDTO {
+public class ConvRvDTO {
 	
 	private int seq;
 	private String id;
@@ -13,7 +13,7 @@ public class RestRvDTO {
 	private String text;
 	private String name;
 	
-	public RestRvDTO(int seq, String id, int s1, int s2, int s3, int s4, int s5, String date, String text, String name) {
+	public ConvRvDTO(int seq, String id, int s1, int s2, int s3, int s4, int s5, String date, String text, String name) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -110,8 +110,5 @@ public class RestRvDTO {
 
 	
 	
-	
-	
-	
-	
+
 }

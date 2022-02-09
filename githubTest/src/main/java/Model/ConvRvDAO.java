@@ -7,13 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class RestRvDAO {
-	
+public class ConvRvDAO {
+
 	Connection conn = null;
 	ResultSet rs = null;
 	PreparedStatement psmt = null;
 	int cnt = 0;
-	RestRvDTO dto = null;
+	ConvRvDTO dto = null;
 
 	public void DBconn() {
 
@@ -47,16 +47,16 @@ public class RestRvDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	public int insertReview(int seq, String id,int s1, int s2, int s3,int s4, int s5,String text, String name) {
-		System.out.println("À½½ÄÁ¡ insert ¸®ºä µé¾î¿È");
+
+	public int insertReview(int seq, String id, int s1, int s2, int s3, int s4, int s5, String text, String name) {
+		System.out.println("ÆíÀÇ½Ã¼³ insert ¸®ºä µé¾î¿È");
 		try {
 			DBconn();
-			
-			String sql = "insert into tbl_rest_review values(?,?,?,?,?,?,?,to_char(sysdate,'yyyy.mm.dd'),?,?)";
-			
-			psmt=conn.prepareStatement(sql);
-			
+
+			String sql = "insert into tbl_conv_review values(?,?,?,?,?,?,?,to_char(sysdate,'yyyy.mm.dd'),?,?)";
+
+			psmt = conn.prepareStatement(sql);
+
 			psmt.setInt(1, seq);
 			psmt.setString(2, id);
 			psmt.setInt(3, s1);
@@ -69,7 +69,7 @@ public class RestRvDAO {
 			
 			cnt = psmt.executeUpdate();
 			
-			System.out.println("insert ¸®ºä µé¾î¿È");
+			
 			System.out.println(seq);
 			System.out.println(s1);
 			System.out.println(s2);
@@ -83,23 +83,24 @@ public class RestRvDAO {
 			e.printStackTrace();
 		} finally {
 			DBclose();
-		} return cnt;
+		}
+		return cnt;
 	}
-	
-	public ArrayList<RestRvDTO> selectReview(String seq) {
-		
-		ArrayList<RestRvDTO> list = new ArrayList<RestRvDTO>();
-		
+
+	public ArrayList<ConvRvDTO> selectReview(String seq) {
+
+		ArrayList<ConvRvDTO> list = new ArrayList<ConvRvDTO>();
+
 		try {
 			DBconn();
-			
-			String sql = "select * from tbl_rest_review where seq = ?";
-			
+
+			String sql = "select * from tbl_conv_review where seq = ?";
+
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1,seq);
-			rs=psmt.executeQuery();
-			
-			while(rs.next()) {
+			psmt.setString(1, seq);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
 				int sequence = rs.getInt(1);
 				String id = rs.getString(2);
 				int sc1 = rs.getInt(3);
@@ -108,113 +109,114 @@ public class RestRvDAO {
 				int sc4 = rs.getInt(6);
 				int sc5 = rs.getInt(7);
 				String date = rs.getString(8);
-				String text = rs.getString(9);
+				String txt = rs.getString(9);
 				String name = rs.getString(10);
 				
-				dto = new RestRvDTO(sequence, id, sc1, sc2, sc3, sc4, sc5, date, text, name);
+				dto = new ConvRvDTO(sequence, id, sc1, sc2, sc3, sc4, sc5, date, txt, name);
 				list.add(dto);
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBclose();
-		} return list;
+		}
+		return list;
 	}
-	
-	public RestAvg1DTO selectAvgs1(String seq) {
-			
-			RestAvg1DTO dto = null;
-			
-			System.out.println("Á¡¼ö1 Æò±Õ°ª µé¾î¿È");
-			try {
-				DBconn();
-				
-				String sql = "select round(avg(score1),1) from tbl_rest_review where seq = ?";
-				
-				psmt = conn.prepareStatement(sql);
-				psmt.setString(1,seq);
-				rs=psmt.executeQuery();
-				
-				
-				if(rs.next()) {
-					float avgs1 = rs.getFloat(1);
-					
-					dto = new RestAvg1DTO(avgs1);
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				DBclose();
-			} return dto;
+
+	public ConvAvg1DTO selectAvgs1(String seq) {
+
+		ConvAvg1DTO dto = null;
+
+		System.out.println("Á¡¼ö1 Æò±Õ°ª µé¾î¿È");
+		try {
+			DBconn();
+
+			String sql = "select round(avg(score1),1) from tbl_conv_review where seq = ?";
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, seq);
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				float avgs1 = rs.getFloat(1);
+
+				dto = new ConvAvg1DTO(avgs1);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBclose();
+		}
+		return dto;
 	}
-	
-	public RestAvg2DTO selectAvgs2(String seq) {
-		
+
+	public ConvAvg2DTO selectAvgs2(String seq) {
+
 		System.out.println("Á¡¼ö2 Æò±Õ°ª µé¾î¿È");
-		RestAvg2DTO dto = null;
-		
+		ConvAvg2DTO dto = null;
+
 		try {
 			DBconn();
-			
-			String sql = "select round(avg(score2),1) from tbl_rest_review where seq = ?";
-			
+
+			String sql = "select round(avg(score2),1) from tbl_conv_review where seq = ?";
+
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1,seq);
-			rs=psmt.executeQuery();
-			
-			
-			if(rs.next()) {
+			psmt.setString(1, seq);
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
 				float avgs2 = rs.getFloat(1);
-				
-				dto = new RestAvg2DTO(avgs2);
+
+				dto = new ConvAvg2DTO(avgs2);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBclose();
-		} return dto;
+		}
+		return dto;
 	}
-	
-	public RestAvg3DTO selectAvgs3(String seq) {
-		
+
+	public ConvAvg3DTO selectAvgs3(String seq) {
+
 		System.out.println("Á¡¼ö3 Æò±Õ°ª µé¾î¿È");
-		RestAvg3DTO dto = null;
-		
+		ConvAvg3DTO dto = null;
+
 		try {
 			DBconn();
-			
-			String sql = "select round(avg(score3),1) from tbl_rest_review where seq = ?";
-			
+
+			String sql = "select round(avg(score3),1) from tbl_conv_review where seq = ?";
+
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1,seq);
-			rs=psmt.executeQuery();
-			
-			
-			if(rs.next()) {
+			psmt.setString(1, seq);
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
 				float avgs3 = rs.getFloat(1);
-				
-				dto = new RestAvg3DTO(avgs3);
+
+				dto = new ConvAvg3DTO(avgs3);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBclose();
-		} return dto;
+		}
+		return dto;
 	}
 	
-	public RestAvg4DTO selectAvgs4(String seq) {
+	public ConvAvg4DTO selectAvgs4(String seq) {
 
 		System.out.println("Á¡¼ö4 Æò±Õ°ª µé¾î¿È");
-		RestAvg4DTO dto = null;
+		ConvAvg4DTO dto = null;
 
 		try {
 			DBconn();
 
-			String sql = "select round(avg(score4),1) from tbl_rest_review where seq = ?";
+			String sql = "select round(avg(score4),1) from tbl_conv_review where seq = ?";
 
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, seq);
@@ -223,7 +225,7 @@ public class RestRvDAO {
 			if (rs.next()) {
 				float avgs4 = rs.getFloat(1);
 
-				dto = new RestAvg4DTO(avgs4);
+				dto = new ConvAvg4DTO(avgs4);
 			}
 
 		} catch (Exception e) {
@@ -234,15 +236,15 @@ public class RestRvDAO {
 		return dto;
 	}
 	
-	public RestAvg5DTO selectAvgs5(String seq) {
+	public ConvAvg5DTO selectAvgs5(String seq) {
 
 		System.out.println("Á¡¼ö5 Æò±Õ°ª µé¾î¿È");
-		RestAvg5DTO dto = null;
+		ConvAvg5DTO dto = null;
 
 		try {
 			DBconn();
 
-			String sql = "select round(avg(score5),1) from tbl_rest_review where seq = ?";
+			String sql = "select round(avg(score5),1) from tbl_conv_review where seq = ?";
 
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, seq);
@@ -250,7 +252,8 @@ public class RestRvDAO {
 
 			if (rs.next()) {
 				float avgs5 = rs.getFloat(1);
-				dto = new RestAvg5DTO(avgs5);
+
+				dto = new ConvAvg5DTO(avgs5);
 			}
 
 		} catch (Exception e) {
@@ -260,6 +263,9 @@ public class RestRvDAO {
 		}
 		return dto;
 	}
+
+	
+
 	
 
 }

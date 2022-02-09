@@ -1,6 +1,6 @@
 package Model;
 
-public class RestRvDTO {
+public class StayRvDTO {
 	
 	private int seq;
 	private String id;
@@ -12,8 +12,9 @@ public class RestRvDTO {
 	private String date;
 	private String text;
 	private String name;
+	private String filename;
 	
-	public RestRvDTO(int seq, String id, int s1, int s2, int s3, int s4, int s5, String date, String text, String name) {
+	public StayRvDTO(int seq, String id, int s1, int s2, int s3, int s4, int s5, String date, String text, String name) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -108,7 +109,6 @@ public class RestRvDTO {
 		this.name = name;
 	}
 
-	
 	
 	
 	

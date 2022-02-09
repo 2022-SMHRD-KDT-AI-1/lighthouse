@@ -2,6 +2,7 @@ package com.test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.Inet4Address;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -22,23 +24,28 @@ import Model.RestRvDAO;
 import Model.RestRvDTO;
 import Model.StayDAO;
 import Model.StayDTO;
+import Model.jsonRestVO;
+import Model.testDAO;
+import Model.testDTO;
 
-@WebServlet("/testAjax")
+@WebServlet("/test/testAjax")
 public class testAjax extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/* 시설분야와 구를 선택했을 때 ajax로 주고받는 곳.... */
-		
 		response.setCharacterEncoding("utf-8");
-		
+		request.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
+		
+		
 		
 		// 수업때랑 똑같이 name으로 값 받음, 안받아도 되면 생략가능
 		String kind = request.getParameter("kind");
 		String gu = request.getParameter("gu");
+		
+		
 		
 		// 난 dao, dto 소환해야함 
 		// kind, gu값에 따라 값이 달라기지때문.. 
@@ -54,6 +61,8 @@ public class testAjax extends HttpServlet {
 		ArrayList<RehabDTO> rehab_dto = null;
 		ArrayList<RestRvDTO> rest_rv_select = null;
 		
+		
+		
 		// Gson : 객체를 json형태로 변환시켜줌
 		// 변환시켜주고 난 jsonString에 담아줬다..
 		Gson gson = new Gson();
@@ -62,6 +71,7 @@ public class testAjax extends HttpServlet {
 		if(kind.equals("음식점")) {
 			rest_dto =  rest_dao.selectRest(gu);
 			jsonString = gson.toJson(rest_dto);
+			
 		}
 		else if(kind.equals("편의시설")) {
 			conv_dto = conv_dao.selectConv(gu);
@@ -78,7 +88,6 @@ public class testAjax extends HttpServlet {
 		// 이걸로... 보내지나봄..?!!!
 		System.out.println(jsonString);
 		out.print(jsonString);
-		
 	}
 
 }
