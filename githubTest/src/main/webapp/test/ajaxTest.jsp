@@ -21,7 +21,7 @@
 
 </head>
 <body>
-<!-- deploy test -->
+<!-- deploy test 22/02/11 -->
 	<%
 		GuDAO dao = new GuDAO();
 	ArrayList<GuDTO> gu_list = dao.selectAll();
