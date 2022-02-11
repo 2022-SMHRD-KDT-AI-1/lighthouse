@@ -15,4 +15,4 @@ openAPI 기반 서울특별시 장애인을 위한 편의시설 정보 제공 �
 ## 대표이미지
 ![캡처](https://user-images.githubusercontent.com/77366402/153344509-bc04f68f-8536-4072-a792-20e08996581c.JPG)
 ## 서비스 URL
-http://localhost:8084/githubTest/test/ajaxTest.jsp
+http://project-student-e.ddns.net:9002/lighthouse/test/ajaxTest.jsp
