@@ -2,8 +2,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.smhrd</groupId>
-	<artifactId>projectTest</artifactId>
+	<groupId>com.smhrd.lighthouse</groupId>
+	<artifactId>lighthouse</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>projectTest Maven Webapp</name>
@@ -53,7 +53,7 @@
 		
 	</dependencies>
 	<build>
-		<finalName>projectTest</finalName>
+		<finalName>lighthouse</finalName>
 		<pluginManagement>
 	    <plugins>
 	    <!-- 서버 배포 셋팅 -->
